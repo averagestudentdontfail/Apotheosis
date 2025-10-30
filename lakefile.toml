@@ -1,7 +1,7 @@
-name = "Treasure Peak"
+name = "TreasurePeak"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["«Treasure Peak»"]
+defaultTargets = ["«TreasurePeak»"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -14,4 +14,4 @@ name = "mathlib"
 scope = "leanprover-community"
 
 [[lean_lib]]
-name = "«Treasure Peak»"
+name = "«TreasurePeak»"
