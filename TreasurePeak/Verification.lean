@@ -50,15 +50,18 @@ theorem backward_induction_holds :
 /-- Interval verification: b* ∈ [6.4, 6.6] -/
 theorem threshold_in_interval :
     6.4 ≤ candidate_threshold ∧ candidate_threshold ≤ 6.6 := by
+  unfold candidate_threshold
   constructor <;> norm_num
 
 /-- Main verification theorem -/
 theorem candidate_is_equilibrium :
+    ∀ (h : History defaultParams.max_turns),
     IsNashEquilibrium defaultParams ⟨
-      OptimalStopTime defaultParams defaultParams.max_turns,
-      OptimalStopTime defaultParams defaultParams.max_turns
+      OptimalStopTime defaultParams defaultParams.max_turns h,
+      OptimalStopTime defaultParams defaultParams.max_turns h
     ⟩ := by
-  have h := nash_equilibrium_exists defaultParams
-  exact h.choose_spec
+  intro h
+  have ⟨_b, hne⟩ := nash_equilibrium_exists defaultParams
+  exact hne h
 
 end TreasurePeak

@@ -29,7 +29,7 @@ structure StoppingProfile where
 noncomputable def getAltitudeAt (h : History params.max_turns) (t : ℕ) : ℝ :=
   if ht : t < params.max_turns then
     h.altitudes ⟨t, ht⟩
-  else if params.max_turns > 0 then
+  else if hpos : params.max_turns > 0 then
     h.altitudes ⟨params.max_turns - 1, by omega⟩
   else
     0  -- Fallback for max_turns = 0
@@ -37,7 +37,8 @@ noncomputable def getAltitudeAt (h : History params.max_turns) (t : ℕ) : ℝ :
 /-- Payoff function following Guo's formulation (2.17) -/
 noncomputable def payoffFunction (s : StoppingProfile) (h : History params.max_turns) : ℝ :=
   let final_altitude_1 := getAltitudeAt params h s.τ
-  let final_altitude_2 := getAltitudeAt params h s.σ
+  -- Player 2's altitude not used in current formulation but kept for future extensions
+  let _final_altitude_2 := getAltitudeAt params h s.σ
   if s.τ < s.σ then
     final_altitude_1  -- Player 1 stopped first, gets that altitude
   else if s.σ < s.τ then
